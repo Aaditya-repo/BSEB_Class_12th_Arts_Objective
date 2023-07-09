@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="dh">
+
+        <attr name="backgroundColor" format="color"/>
+        <attr name="textColor" format="color"/>
+        <attr name="menutext" format="color"/>
+        <attr name="menuBack" format="color"/>
+
+
+    </declare-styleable>
+
+</resources>
