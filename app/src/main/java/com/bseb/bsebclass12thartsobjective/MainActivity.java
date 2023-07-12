@@ -225,7 +225,7 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 
     private void loadWebView() {
 
-        webView.loadUrl("https://bsebtarget.com/BSEB/Class%2012th%20Arts/Objective/Objective%20Question.php");
+        webView.loadUrl("https://bsebtarget.com/BSEB/Class%2012th%20Arts/Home.php");
         webView.getSettings().setJavaScriptEnabled(true);
 
         webView.setWebViewClient(new WebViewClient() {

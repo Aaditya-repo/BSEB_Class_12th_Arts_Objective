@@ -24,10 +24,13 @@ public class MainActivity2 extends AppCompatActivity implements SwipeRefreshLayo
     // WebView
     String url = "";
     String burl = "";
+    String aurl = "";
+    String title = "";
     WebView webView;
     SwipeRefreshLayout swipeRefreshLayout;
     TextView textView;
     ImageView imageView;
+    Intent intent;
 
     @Override
     public boolean onSupportNavigateUp() {
@@ -59,7 +62,7 @@ public class MainActivity2 extends AppCompatActivity implements SwipeRefreshLayo
         CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
         builder.setShowTitle(true);
         builder.setInstantAppsEnabled(true);
-        builder.setToolbarColor(ContextCompat.getColor(this,R.color.tra));
+        builder.setToolbarColor(ContextCompat.getColor(this, R.color.tra));
         customTabsIntent = builder.build();
         customTabsIntent.intent.setPackage("com.android.chrome");
     }
@@ -69,7 +72,7 @@ public class MainActivity2 extends AppCompatActivity implements SwipeRefreshLayo
         webView.loadUrl(getIntent().getStringExtra("links"));
         webView.getSettings().setJavaScriptEnabled(true);
 
-        webView.setWebViewClient(new WebViewClient(){
+        webView.setWebViewClient(new WebViewClient() {
 
             @Override
             public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
@@ -99,8 +102,7 @@ public class MainActivity2 extends AppCompatActivity implements SwipeRefreshLayo
             }
         });
 
-        webView.setWebChromeClient(new WebChromeClient()
-        {
+        webView.setWebChromeClient(new WebChromeClient() {
             @Override
             public boolean onConsoleMessage(ConsoleMessage consoleMessage) {
 
@@ -109,30 +111,44 @@ public class MainActivity2 extends AppCompatActivity implements SwipeRefreshLayo
 
                 Uri uri = Uri.parse(consoleMessage.message());
 
-                if (url.equals("true"))
-                {
-                    Intent intent = new Intent(MainActivity2.this,MainActivity2.class);
-                    intent.putExtra("links",consoleMessage.message());
+                if (url.equals("true")) {
+                    Intent intent = new Intent(MainActivity2.this, MainActivity2.class);
+                    intent.putExtra("links", consoleMessage.message());
                     url = "false";
                     startActivity(intent);
                 }
 
-                if (consoleMessage.message().equals("url"))
-                {
+                if (consoleMessage.message().equals("url")) {
                     url = "true";
                 }
 
-                if (burl.equals("true"))
+                if (aurl.equals("true")) {
+                    intent = new Intent(MainActivity2.this, MainActivity3.class);
+                    intent.putExtra("links", consoleMessage.message());
+                    aurl = "false";
+                }
+                if (consoleMessage.message().equals("aurl")) {
+                    aurl = "true";
+                }
+                if (title.equals("true"))
                 {
+                    intent.putExtra("titel",consoleMessage.message());
+                    title = "false";
+                    startActivity(intent);
+                }
+                if (consoleMessage.message().equals("title"))
+                {
+                    title = "true";
+                }
 
-                    customTabsIntent.launchUrl(MainActivity2.this,uri);
+                if (burl.equals("true")) {
 
+                    customTabsIntent.launchUrl(MainActivity2.this, uri);
                     burl = "false";
 
                 }
 
-                if (consoleMessage.message().equals("burl"))
-                {
+                if (consoleMessage.message().equals("burl")) {
                     burl = "true";
                 }
 
